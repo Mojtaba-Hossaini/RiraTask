@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "UserManagementGRPCClient";
+
+package user;
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string family = 3;
+    string nationalCode = 4;
+    string birthday = 5;
+}
+
+message CreateUserRequest {
+    string name = 2;
+    string family = 3;
+    string nationalCode = 4;
+    string birthday = 5;
+}
+
+service ManageUser {
+    rpc CreateUser (CreateUserRequest) returns (User);
+    rpc GetUser (UserId) returns (User);
+    rpc UpdateUser (User) returns (User);
+    rpc DeleteUser (UserId) returns (ConfirmResponse);
+}
+
+message UserId {
+    int32 id = 1;
+}
+
+message ConfirmResponse {
+    bool done = 1;
+}
+
+message Empty {}
